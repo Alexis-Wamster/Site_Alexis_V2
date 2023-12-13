@@ -1,3 +1,30 @@
 .baniere{
 	width: 100%;
+	position: relative;
+}
+
+.emoji{
+	position: absolute;
+}
+
+.emoji_serpent{
+	opacity: 0;
+	width: 11%;
+	left: 48.5%;
+	top: 72%;
+}
+
+.emoji_serpent:hover{
+	opacity: 1;
+	cursor: pointer;
+}
+
+#snake_game{
+	z-index: 10;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: red;
+	border: 5px solid black;
+	height: 400px;
 }

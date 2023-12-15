@@ -11,8 +11,8 @@ const TOUCHE ={
 };
 
 var startX, startY, distX, distY;
-const threshold = 150;
-const restraint = 100;
+const threshold = 50;
+const restraint = 30;
 
 var TAILLE = {'x':100, 'y':100}; // taille d'une case
 var MARGE = {'x':10, 'y':10};
@@ -34,6 +34,7 @@ let directionQueue;
 let gameOver = true;
 let pause;
 let snakeAFaim;
+let programmeStart = false;
 
 
 
@@ -42,53 +43,59 @@ let snakeAFaim;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 document.addEventListener('keydown', function(event) {
-    window.scrollTo(0, 0);
-    event.preventDefault();
-    if (gameOver === true){
-        initialisation();
-        boucle();
-    }
-    var codeTouche = event.keyCode || event.which;
-    if (pause === false){
-        if (TOUCHE[codeTouche] === "GAUCHE" || TOUCHE[codeTouche] === "DROITE" || TOUCHE[codeTouche] === "HAUT" || TOUCHE[codeTouche] === "BAS"){
-            goToDirection(TOUCHE[codeTouche]);
+    if (programmeStart){
+        window.scrollTo(0, 0);
+        event.preventDefault();
+        if (gameOver === true){
+            initialisation();
+            boucle();
         }
-    }
-    if (TOUCHE[codeTouche] === "ESPACE"){
-        pause = !pause;
+        var codeTouche = event.keyCode || event.which;
+        if (pause === false){
+            if (TOUCHE[codeTouche] === "GAUCHE" || TOUCHE[codeTouche] === "DROITE" || TOUCHE[codeTouche] === "HAUT" || TOUCHE[codeTouche] === "BAS"){
+                goToDirection(TOUCHE[codeTouche]);
+            }
+        }
+        if (TOUCHE[codeTouche] === "ESPACE"){
+            pause = !pause;
+        }
     }
 });
 
 document.addEventListener('touchstart', function(event) {
-    var touch = event.changedTouches[0];
-    startX = touch.pageX;
-    startY = touch.pageY;
-    if (gameOver === true){
-        initialisation();
-        boucle();
+    if (programmeStart){
+        var touch = event.changedTouches[0];
+        startX = touch.pageX;
+        startY = touch.pageY;
+        if (gameOver === true){
+            initialisation();
+            boucle();
+        }
     }
 });
 
 document.addEventListener('touchmove', function(event) {
-    event. preventDefault();
-    var touch = event.changedTouches[0];
-    distX = touch.pageX - startX;
-    distY = touch.pageY - startY;
-    if (distX > threshold){
-        goToDirection("DROITE");
-        setStart(touch.pageX, touch.pageY);
-    }
-    if (-distX > threshold){
-        goToDirection("GAUCHE");
-        setStart(touch.pageX, touch.pageY);
-    }
-    if (distY > threshold){
-        goToDirection("BAS");
-        setStart(touch.pageX, touch.pageY);
-    }
-    if (-distY > threshold){
-        goToDirection("HAUT");
-        setStart(touch.pageX, touch.pageY);
+    if (programmeStart){
+        event. preventDefault();
+        var touch = event.changedTouches[0];
+        distX = touch.pageX - startX;
+        distY = touch.pageY - startY;
+        if (distX > threshold){
+            goToDirection("DROITE");
+            setStart(touch.pageX, touch.pageY);
+        }
+        if (-distX > threshold){
+            goToDirection("GAUCHE");
+            setStart(touch.pageX, touch.pageY);
+        }
+        if (distY > threshold){
+            goToDirection("BAS");
+            setStart(touch.pageX, touch.pageY);
+        }
+        if (-distY > threshold){
+            goToDirection("HAUT");
+            setStart(touch.pageX, touch.pageY);
+        }
     }
 }, { passive: false });
 
@@ -99,8 +106,10 @@ function setStart(abs, ord){
 
 function goToDirection(direction){
     if (derniereDirection !== direction && derniereDirection !== getDirectionOposee(direction)){
-        listeDirection.push(direction);
-        derniereDirection = direction;
+        if (listeDirection.length < 2){
+            listeDirection.push(direction);
+            derniereDirection = direction;
+        }
     }
 }
 
@@ -527,8 +536,29 @@ function initialisation(){
 }
 
 function start(){
+    programmeStart = true;
+    effacerTout();
     initialisation();
     boucle();
+}
+
+function effacerTout(){
+    var emojis = document.querySelectorAll('.emoji');
+    var bienvenue = document.querySelectorAll('.bienvenue');
+    effacerUn(emojis,0);
+    effacerUn(bienvenue,0);
+}
+
+function effacerUn(emojis, index){
+    if (index < emojis.length) {
+    emojis[index].classList.add('effacer');
+    setTimeout(() => {
+      effacerUn(emojis, index + 1);
+    }, 50);
+    setTimeout(() => {
+      emojis[index].style.display = 'none';
+    }, 300);
+  }
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -547,6 +577,6 @@ function boucle(){
         }
     }
     if (gameOver === false){
-        setTimeout(boucle, 10);
+        setTimeout(boucle, 5);
     }
 }

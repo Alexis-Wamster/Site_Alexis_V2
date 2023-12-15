@@ -3,12 +3,21 @@
 	position: relative;
 }
 
+.bienvenue{
+	width: 100%;
+	position: absolute;
+	left: 0%;
+	top: 0%;
+}
+
 .emoji{
+	opacity: 0.8;
+	width: 11%;
 	position: absolute;
 }
 
 .emoji_serpent{
-	opacity: 0;
+	opacity: 0.5;
 	width: 11%;
 	left: 48.5%;
 	top: 72%;
@@ -19,12 +28,136 @@
 	cursor: pointer;
 }
 
+.effacer{
+	opacity: 0!important;
+	transition: opacity 0.3s ease-in-out, display 0.3s!important;
+}
+
 #snake_game{
 	z-index: 10;
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	background-color: red;
-	border: 5px solid black;
-	height: 400px;
+}
+
+.emoji_montagne1{
+	right: 30%;
+	bottom: 20%;
+}
+
+.emoji_montagne2{
+	right: 21%;
+	bottom: 23%;
+}
+
+.emoji_montagne3{
+	right: 25%;
+	bottom: 28%;
+}
+
+.emoji_tente{
+	right: 17%;
+	bottom: 2%;
+}
+
+.emoji_sapin{
+	right: 25%;
+	bottom: 2%;
+}
+
+.emoji_velo{
+	width: 15%;
+	right: 2%;
+	bottom: 0%;
+}
+
+.emoji_depart{
+	right: 0%;
+	bottom: 40%;
+}
+
+.emoji_course{
+	width: 15%;
+	right: 7%;
+	bottom: 32%;
+}
+
+.emoji_clap{
+	right: 1%;
+	top: 2%;
+}
+
+.emoji_camera{
+	right: 15%;
+	top: 2%;
+}
+
+.emoji_palette{
+	right: 28%;
+	top: 0%;
+}
+
+.emoji_ciseaux{
+	right: 36%;
+	top: 4%;
+	transform: rotate(-60deg);
+}
+
+.emoji_frites{
+	left: 40%;
+	top: 3%;
+}
+
+.emoji_couteau{
+	width: 13%;
+	left: 33%;
+	top: 2%;
+}
+
+.emoji_patate{
+	left: 29%;
+	top: 8%;
+	transform: rotate(140deg);
+}
+
+.emoji_fpt{
+	left: 15%;
+	top: 0%;
+}
+
+.emoji_feu{
+	left: 5%;
+	top: 0%;
+}
+
+.emoji_extincteur{
+	left: 0%;
+	top: 5%;
+}
+
+.emoji_abacus{
+	left: 1%;
+	bottom: 40%;
+}
+
+.emoji_equerre{
+	left: 1%;
+	bottom: 2%;
+}
+
+.emoji_robot{
+	width: 14%;
+	left: 10%;
+	bottom: 18%;
+}
+
+.emoji_alien{
+	left: 35%;
+	bottom: 2%;
+}
+
+.emoji_developpeur{
+	width: 15%;
+	left: 19%;
+	bottom: 0%;
 }
